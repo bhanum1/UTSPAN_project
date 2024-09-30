@@ -13,7 +13,7 @@ for trial_number in range(1,126):
     with open(f'./standardized_data/BB_FT_P0001_T{trial_number_corrected}.json') as json_file:
         free_throw_data = json.load(json_file)
 
-    hip_position = np.array([f['data']['player']['R_HIP'] for f in free_throw_data['tracking']])
+    hip_position = np.array([f['data']['player']['L_KNEE'] for f in free_throw_data['tracking']])
 
     if free_throw_data['result'] == 'missed':
         result = 0
@@ -35,7 +35,7 @@ results = [t[2] for t in data]
 colors = ['red' if result == 0 else 'blue' for result in results]
 
 # Plotting
-plt.scatter(values, [0] * len(values), c=colors, s=20)  # s is the size of the dots
+plt.scatter(values, [0] * len(values), c=colors, s=5)  # s is the size of the dots
 
 # Adding labels and title
 plt.xlabel('Value')

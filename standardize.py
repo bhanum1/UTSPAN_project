@@ -42,13 +42,12 @@ def standardize(folder):
                 # Process the JSON data using your function
                 entry_frame, exit_frame = find_points(data)
                 processed_data = data
-                processed_data['tracking'] = processed_data['tracking'][entry_frame:exit_frame]
-
+                processed_data['tracking'] = processed_data['tracking'][entry_frame+10:exit_frame]
             with open(output_file_path, 'w') as outfile:
                 json.dump(processed_data, outfile, indent=4)
 
 
-
+standardize('P0001')
 t1 = animate_trial('standardized_data/BB_FT_P0001_T0104.json')
 t2 = animate_trial('P0001/BB_FT_P0001_T0104.json')
 
