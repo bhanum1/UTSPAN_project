@@ -5,6 +5,7 @@ import sklearn.decomposition
 from animate import animate_trial
 import sklearn
 
+BODY_PART = 'R_KNEE'
 data = []
 for trial_number in range(1,126):
 
@@ -13,7 +14,7 @@ for trial_number in range(1,126):
     with open(f'./standardized_data/BB_FT_P0001_T{trial_number_corrected}.json') as json_file:
         free_throw_data = json.load(json_file)
 
-    hip_position = np.array([f['data']['player']['L_KNEE'] for f in free_throw_data['tracking']])
+    hip_position = np.array([f['data']['player'][BODY_PART] for f in free_throw_data['tracking']])
 
     if free_throw_data['result'] == 'missed':
         result = 0
@@ -32,15 +33,15 @@ values = [t[1] for t in data]
 results = [t[2] for t in data]
 
 # Creating a color map for the results: 0 -> red, 1 -> blue
-colors = ['red' if result == 0 else 'blue' for result in results]
+colors = ['red' if result == 0 else 'green' for result in results]
 
 # Plotting
 plt.scatter(values, [0] * len(values), c=colors, s=5)  # s is the size of the dots
 
 # Adding labels and title
-plt.xlabel('Value')
+plt.xlabel('Std Dev Of Movement')
 plt.yticks([])  # Hide the y-axis ticks
-plt.title('Number Line with Color-Coded Dots')
+plt.title(BODY_PART)
 
 # Show plot
 plt.show()
