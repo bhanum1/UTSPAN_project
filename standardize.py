@@ -8,7 +8,7 @@ import os
 def find_points(data):
     '''
     Input trial in data form
-    Outputs a standardized time series based on when the participant releases the ball.
+    Outputs a standardized time series based on when the participant gets and releases the ball.
     
     '''
     ball_frames = []
